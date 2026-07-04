@@ -1,0 +1,42 @@
+[
+    {
+        "id": "1",
+        "timestamp": "2026-07-03 21:40:12",
+        "tipo": "Intento de Fuerza Bruta SSH",
+        "criticidad": "Alta",
+        "ip_origen": "198.51.100.42",
+        "estado": "Pendiente"
+    },
+    {
+        "id": "2",
+        "timestamp": "2026-07-03 21:42:05",
+        "tipo": "Detección de Phishing Exfiltration",
+        "criticidad": "Alta",
+        "ip_origen": "203.0.113.115",
+        "estado": "En Revisión"
+    },
+    {
+        "id": "3",
+        "timestamp": "2026-07-03 21:44:50",
+        "tipo": "Escaneo de Puertos Nmap",
+        "criticidad": "Media",
+        "ip_origen": "192.0.2.10",
+        "estado": "Pendiente"
+    },
+    {
+        "id": "4",
+        "timestamp": "2026-07-03 21:45:15",
+        "tipo": "Anomalía de Tráfico (OSINT Inbound)",
+        "criticidad": "Baja",
+        "ip_origen": "198.51.100.89",
+        "estado": "Resuelta"
+    },
+    {
+        "id": "5",
+        "timestamp": "2026-07-03 21:46:01",
+        "tipo": "Uso de Herramienta Curl Reconnaissance",
+        "criticidad": "Baja",
+        "ip_origen": "192.0.2.55",
+        "estado": "Pendiente"
+    }
+]
