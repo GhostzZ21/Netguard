@@ -1,49 +1,106 @@
 import React from 'react';
 
-const AlertCard = ({ alerta }) => {
-    // Asignar un color de fondo dinámico según la criticidad
-    const getCriticidadEstilo = (nivel) => {
+const AlertCard = React.memo(({ alerta, onEliminar }) => {
+    const getColors = (nivel) => {
         switch (nivel) {
-            case 'Alta': return { backgroundColor: '#ffebe6', borderColor: '#ff4d4f', color: '#d32f2f' };
-            case 'Media': return { backgroundColor: '#fffbe6', borderColor: '#ffe58f', color: '#b78103' };
-            case 'Baja': return { backgroundColor: '#f6ffed', borderColor: '#b7eb8f', color: '#389e0d' };
-            default: return { backgroundColor: '#f5f5f5', borderColor: '#d9d9d9', color: '#595959' };
+            case 'Alta': return { border: '#ff4d4f', text: '#b91c1c', bgBadge: '#fee2e2' };
+            case 'Media': return { border: '#faad14', text: '#92400e', bgBadge: '#fef3c7' };
+            case 'Baja': return { border: '#52c41a', text: '#166534', bgBadge: '#dcfce7' };
+            default: return { border: '#d9d9d9', text: '#595959', bgBadge: '#f5f5f5' };
         }
     };
 
-    const estilo = getCriticidadEstilo(alerta.criticidad);
+    const colores = getColors(alerta.criticidad);
 
     return (
         <div style={{
-            border: '2px solid',
-            borderRadius: '8px',
-            padding: '15px',
-            marginBottom: '12px',
-            fontFamily: 'sans-serif',
-            transition: 'transform 0.2s',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-            ...estilo
+            backgroundColor: '#ffffff',
+            border: '1px solid #e8e8e8',
+            borderLeft: `6px solid ${colores.border}`,
+            borderRadius: '4px',
+            padding: '16px',
+            marginBottom: '14px',
+            fontFamily: 'Segoe UI, Roboto, sans-serif',
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.02)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px'
         }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h3 style={{ margin: '0 0 8px 0' }}>⚠️ {alerta.tipo}</h3>
-                <span style={{ fontWeight: 'bold', textTransform: 'uppercase', fontSize: '0.85em' }}>
-                    [{alerta.criticidad}]
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <h3 style={{ margin: 0, fontSize: '1.05em', color: '#141414', fontWeight: '600' }}>
+                    <span style={{ color: '#8c8c8c', fontSize: '0.85em', marginRight: '8px', fontFamily: 'monospace' }}>[SYS_ALERT]</span>
+                    {alerta.tipo}
+                </h3>
+                <span style={{
+                    padding: '3px 8px',
+                    borderRadius: '2px',
+                    backgroundColor: colores.bgBadge,
+                    color: colores.text,
+                    fontWeight: '700',
+                    fontSize: '0.7em',
+                    letterSpacing: '0.5px'
+                }}>
+                    {alerta.criticidad.toUpperCase()}
                 </span>
             </div>
-            <p style={{ margin: '4px 0', fontSize: '0.9em' }}><strong>IP Origen:</strong> {alerta.ip_origen}</p>
-            <p style={{ margin: '4px 0', fontSize: '0.9em' }}><strong>Timestamp:</strong> {alerta.timestamp}</p>
-            <div style={{ marginTop: '10px', fontSize: '0.85em', textAlign: 'right' }}>
+
+            <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', fontSize: '0.88em', color: '#434343' }}>
+                <div>
+                    <span style={{ color: '#8c8c8c' }}>SRC_IP: </span>
+                    <code style={{ background: '#f5f5f5', padding: '2px 6px', borderRadius: '3px', fontFamily: 'monospace', color: '#0050b3', fontWeight: '600' }}>
+                        {alerta.ip_origen}
+                    </code>
+                </div>
+                <div>
+                    <span style={{ color: '#8c8c8c' }}>TIMESTAMP: </span>
+                    <span style={{ fontWeight: '500', fontFamily: 'monospace' }}>{alerta.timestamp}</span>
+                </div>
+            </div>
+
+            {/* Fila Inferior: Estado y Botón de Eliminar */}
+            <div style={{
+                borderTop: '1px solid #f0f0f0',
+                paddingTop: '8px',
+                marginTop: '4px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+            }}>
+                {/* Botón para Eliminar (CRUD: Delete) */}
+                <button
+                    onClick={() => onEliminar(alerta.id)}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        color: '#ff4d4f',
+                        cursor: 'pointer',
+                        fontSize: '0.82em',
+                        fontWeight: '600',
+                        padding: '2px 4px',
+                        fontFamily: 'monospace'
+                    }}
+                >
+                    [DESCARTAR_ALERTA]
+                </button>
+
                 <span style={{
-                    padding: '4px 8px',
-                    borderRadius: '4px',
-                    background: 'rgba(0,0,0,0.05)',
-                    fontWeight: '500'
+                    fontSize: '0.78em',
+                    fontWeight: '600',
+                    color: alerta.estado === 'Pendiente' ? '#fa8c16' : alerta.estado === 'En Revisión' ? '#1890ff' : '#52c41a',
+                    backgroundColor: '#fafafa',
+                    padding: '2px 8px',
+                    borderRadius: '2px',
+                    border: '1px solid #f0f0f0',
+                    textTransform: 'uppercase',
+                    fontFamily: 'monospace'
                 }}>
-                    Estado: {alerta.estado}
+                    STATUS: {alerta.estado}
                 </span>
             </div>
         </div>
     );
-};
+});
+
+AlertCard.displayName = 'AlertCard';
 
 export default AlertCard;
