@@ -1,7 +1,16 @@
-Nombre del Proyecto: NetGuard SOC Lite  
-Cliente: "SecurIT Solutions", una PYME proveedora de servicios gestionados de TI (MSP) que atiende a microempresas locales.
-Problemática Detectada: El equipo de TI recibe alertas de seguridad fragmentadas a través de correos electrónicos y archivos de texto (logs de tráfico, intentos de fuerza bruta, alertas de phishing). Al no contar con una plataforma centralizada, los analistas pierden tiempo crítico ordenando los datos manualmente, lo que retrasa la respuesta ante incidentes.
-Objetivo de la Solución: Diseñar e implementar la estructura inicial de una Single Page Application (SPA) con React y Vite que actúe como un panel de monitoreo centralizado. 
-Permitirá visualizar de forma dinámica las alertas, filtrarlas por criticidad (Alta, Media, Baja) y preparar el terreno para un flujo de gestión de incidentes.
-Planificación de Integración Externa (Punto 6): En la siguiente etapa, la aplicación consumirá datos mediante solicitudes HTTP desde un servicio externo (como una API simuladora de eventos de red o un webhook de logs).
-Esto aportará valor al automatizar la ingesta de datos en tiempo real, eliminando la carga manual de archivos por parte del analista.  
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
